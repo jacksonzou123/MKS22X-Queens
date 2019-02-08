@@ -5,7 +5,7 @@ public class QueenBoard{
     Board = new int[size][size];
   }
 
-  public boolean addQueen(int r, int c) {
+    private int Count;public boolean addQueen(int r, int c) {
     Board[r][c] = -1;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] += 1;
@@ -62,9 +62,38 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public boolean solve(){
-    return true;
+    for (int i = 0 ; i < Board.length; i++) {
+      for (int j = 0; j < Board.length; j++) {
+        if (Board[i][j] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return checkBoard(0,0);
   }
 
+  public boolean checkBoard(int r, int c) {
+    if (Board[r][c] == 0) {
+      addQueen(r,c);
+      if (r == Board.length) {
+        Sysytem.out.println(toString());
+        return true;
+      }
+      return checkBoard(r+1,0);
+    }
+    if (c == Board.length) {
+      if (r == Board.length) {
+        return false;
+      }
+      for (int i = 0; i < Board.length; i++) {
+        if (Board[r][c] == -1) {
+          removeQueen(r,c);
+        }
+      }
+      return checkBoard(r-1,0)
+    }
+    return checkBoard(r,c+1);
+  }
   /**
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value
