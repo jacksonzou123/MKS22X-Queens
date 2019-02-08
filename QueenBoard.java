@@ -40,7 +40,19 @@ public class QueenBoard{
   *excludes the character up to the *)
   */
   public String toString(){
-
+    String f = "";
+    for (int i = 0; i < Board.length; i++) {
+      for (int j = 0; j < Board.length; j++) {
+        if (Board[i][j] == -1) {
+          f += "Q ";
+        }
+        else {
+          f += "_ ";
+        }
+      }
+      f+= "\t";
+    }
+    return f;
   }
 
   /**
@@ -49,7 +61,7 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public boolean solve(){
-
+    return true;
   }
 
   /**
@@ -57,6 +69,6 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public int countSolutions(){
-
+    return 0;
   }
 }
