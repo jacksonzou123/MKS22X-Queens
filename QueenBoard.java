@@ -43,12 +43,15 @@ public class QueenBoard{
     String f = "";
     for (int i = 0; i < Board.length; i++) {
       for (int j = 0; j < Board.length; j++) {
-        if (Board[i][j] == -1) {
+        /*if (Board[i][j] == -1) {
           f += "Q ";
+
         }
         else {
           f += "_ ";
-        }
+        } */
+        //use this for now in order to debug
+        f += Board[i][j] + " ";
       }
       f+= "\n";
     }
