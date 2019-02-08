@@ -5,10 +5,13 @@ public class QueenBoard{
     Board = new int[size][size];
   }
 
-    private int Count;public boolean addQueen(int r, int c) {
+  public boolean addQueen(int r, int c) {
     Board[r][c] = -1;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] += 1;
+    }
+    for (int i = 1; r+i < Board.length; i++) {
+      Board[r+1][c] += 1;
     }
     for (int i = 1; r+i < Board.length && c+1 < Board.length; i++) {
       Board[r+i][c+i] += 1;
@@ -20,6 +23,9 @@ public class QueenBoard{
     Board[r][c] = 0;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] -= 1;
+    }
+    for (int i = 1; r+i < Board.length; i++) {
+      Board[r+1][c] -= 1;
     }
     for (int i = 1; r+i < Board.length && c+1 < Board.length; i++) {
       Board[r+i][c+i] -= 1;
