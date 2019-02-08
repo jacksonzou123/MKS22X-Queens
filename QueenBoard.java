@@ -75,22 +75,22 @@ public class QueenBoard{
   public boolean checkBoard(int r, int c) {
     if (Board[r][c] == 0) {
       addQueen(r,c);
-      if (r == Board.length) {
-        Sysytem.out.println(toString());
+      if (r == Board.length - 1) {
+        System.out.println(toString());
         return true;
       }
       return checkBoard(r+1,0);
     }
-    if (c == Board.length) {
-      if (r == Board.length) {
+    if (c == Board.length - 1) {
+      if (r == Board.length - 1) {
         return false;
       }
       for (int i = 0; i < Board.length; i++) {
-        if (Board[r][c] == -1) {
-          removeQueen(r,c);
+        if (Board[r][i] == -1) {
+          removeQueen(r,i);
         }
       }
-      return checkBoard(r-1,0)
+      return checkBoard(r-1,0);
     }
     return checkBoard(r,c+1);
   }
