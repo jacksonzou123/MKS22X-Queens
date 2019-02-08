@@ -5,24 +5,24 @@ public class QueenBoard{
     Board = new int[size][size];
   }
 
-  private boolean addQueen(int r, int c) {
+  public boolean addQueen(int r, int c) {
     Board[r][c] = -1;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] += 1;
     }
     for (int i = 1; r+i < Board.length && c+1 < Board.length; i++) {
-      Board[r+1][c+1] += 1;
+      Board[r+i][c+i] += 1;
     }
     return true;
   }
 
-  private boolean removeQueen(int r, int c) {
+  public boolean removeQueen(int r, int c) {
     Board[r][c] = 0;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] -= 1;
     }
     for (int i = 1; r+i < Board.length && c+1 < Board.length; i++) {
-      Board[r+1][c+1] -= 1;
+      Board[r+i][c+i] -= 1;
     }
     return true;
   }
@@ -43,15 +43,13 @@ public class QueenBoard{
     String f = "";
     for (int i = 0; i < Board.length; i++) {
       for (int j = 0; j < Board.length; j++) {
-        /*if (Board[i][j] == -1) {
+        if (Board[i][j] == -1) {
           f += "Q ";
 
         }
         else {
-          f += "_ ";
-        } */
-        //use this for now in order to debug
-        f += Board[i][j] + " ";
+          f += Board[i][j] + " ";
+        }
       }
       f+= "\n";
     }
