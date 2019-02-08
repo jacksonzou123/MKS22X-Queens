@@ -50,7 +50,7 @@ public class QueenBoard{
           f += "_ ";
         }
       }
-      f+= "\t";
+      f+= "\n";
     }
     return f;
   }
