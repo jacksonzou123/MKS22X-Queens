@@ -7,34 +7,28 @@ public class QueenBoard{
 
   public boolean addQueen(int r, int c) {
     Board[r][c] = -1;
-    for (int i = 1; c+i < Board.length; i++) {
-      Board[r][c+i] += 1;
-    }
     for (int i = 1; r+i < Board.length; i++) {
       Board[r+i][c] += 1;
     }
     for (int i = 1; r+i < Board.length && c+i < Board.length; i++) {
       Board[r+i][c+i] += 1;
     }
-    for (int i = 1; r-i > -1 && c+1 < Board.length; i++) {
-      Board[r-i][c+i] += 1;
+    for (int i = 1; c-i > -1 && r+i < Board.length; i++) {
+      Board[r+i][c-i] += 1;
     }
     return true;
   }
 
   public boolean removeQueen(int r, int c) {
     Board[r][c] = 0;
-    for (int i = 1; c+i < Board.length; i++) {
-      Board[r][c+i] -= 1;
-    }
     for (int i = 1; r+i < Board.length; i++) {
       Board[r+i][c] -= 1;
     }
     for (int i = 1; r+i < Board.length && c+i < Board.length; i++) {
       Board[r+i][c+i] -= 1;
     }
-    for (int i = 1; r-i > -1 && c+1 < Board.length; i++) {
-      Board[r-i][c+i] -= 1;
+    for (int i = 1; c-i > -1 && r+i < Board.length; i++) {
+      Board[r+i][c-i] -= 1;
     }
     return true;
   }
@@ -89,6 +83,7 @@ public class QueenBoard{
       for (int i = 0; i < Board.length; i++) {
         if (Board[r-1][i] == -1) {
           removeQueen(r-1,i);
+          //System.out.println(toString());
           return checkBoard(r-1,i+1);
         }
       }
@@ -99,18 +94,20 @@ public class QueenBoard{
         System.out.println(toString());
         return true;
       }
+      //System.out.println(toString());
       return checkBoard(r+1,0);
     }
     else {
       if (c == Board.length-1) {
-        if (r == 0 || r == Board.length-1) {
-          System.out.println(toString());
+        if (r == 0) {
+          //System.out.println(toString());
           return false;
         }
         else {
           for (int i = 0; i < Board.length; i++) {
             if (Board[r][i] == -1) {
               removeQueen(r,i);
+              //System.out.println(toString());
               return checkBoard(r,i+1);
             }
           }
