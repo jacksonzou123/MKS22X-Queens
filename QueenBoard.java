@@ -16,6 +16,9 @@ public class QueenBoard{
     for (int i = 1; r+i < Board.length && c+i < Board.length; i++) {
       Board[r+i][c+i] += 1;
     }
+    for (int i = 1; r-i > -1 && c+1 < Board.length; i++) {
+      Board[r-i][c+i] += 1;
+    }
     return true;
   }
 
@@ -29,6 +32,9 @@ public class QueenBoard{
     }
     for (int i = 1; r+i < Board.length && c+i < Board.length; i++) {
       Board[r+i][c+i] -= 1;
+    }
+    for (int i = 1; r-i > -1 && c+1 < Board.length; i++) {
+      Board[r-i][c+i] -= 1;
     }
     return true;
   }
