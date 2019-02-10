@@ -54,7 +54,7 @@ public class QueenBoard{
 
         }
         else {
-          f += Board[i][j] + " ";
+          f += "_ ";
         }
       }
       f+= "\n";
@@ -68,6 +68,9 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public boolean solve(){
+    if (Board.length <= 3) {
+      return false;
+    }
     for (int i = 0 ; i < Board.length; i++) {
       for (int j = 0; j < Board.length; j++) {
         if (Board[i][j] != 0) {
