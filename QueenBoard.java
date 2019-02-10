@@ -124,6 +124,56 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public int countSolutions(){
-    return 0;
+    if (Board.length <= 3) {
+      return 0;
+    }
+    for (int i = 0 ; i < Board.length; i++) {
+      for (int j = 0; j < Board.length; j++) {
+        if (Board[i][j] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return checkBoardH(0,0,0);
+  }
+
+  public int checkBoardH(int r, int c, int sol) {
+    if (c >= Board.length) {
+      for (int i = 0; i < Board.length; i++) {
+        if (Board[r-1][i] == -1) {
+          removeQueen(r-1,i);
+          //System.out.println(toString());
+          return checkBoardH(r-1,i+1,sol);
+        }
+      }
+    }
+    if (Board[r][c] == 0) {
+      addQueen(r,c);
+      if (r == Board.length-1) {
+        System.out.println(toString());
+        removeQueen(r,c);
+        return checkBoardH(r,c+1,sol);
+      }
+      //System.out.println(toString());
+      return checkBoardH(r+1,0,sol);
+    }
+    else {
+      if (c == Board.length-1) {
+        if (r == 0) {
+          //System.out.println(toString());
+          return sol;
+        }
+        else {
+          for (int i = 0; i < Board.length; i++) {
+            if (Board[r][i] == -1) {
+              removeQueen(r,i);
+              //System.out.println(toString());
+              return checkBoardH(r,i+1,sol);
+            }
+          }
+        }
+      }
+      return checkBoardH(r,c+1,sol);
+    }
   }
 }
