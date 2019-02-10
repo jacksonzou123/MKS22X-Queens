@@ -5,7 +5,7 @@ public class QueenBoard{
     Board = new int[size][size];
   }
 
-  public boolean addQueen(int r, int c) {
+  private boolean addQueen(int r, int c) {
     Board[r][c] = -1;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] += 1;
@@ -19,7 +19,7 @@ public class QueenBoard{
     return true;
   }
 
-  public boolean removeQueen(int r, int c) {
+  private boolean removeQueen(int r, int c) {
     Board[r][c] = 0;
     for (int i = 1; c+i < Board.length; i++) {
       Board[r][c+i] -= 1;
@@ -81,24 +81,26 @@ public class QueenBoard{
   public boolean checkBoard(int r, int c) {
     if (Board[r][c] == 0) {
       addQueen(r,c);
-      if (r == Board.length - 1) {
-        System.out.println(toString());
+      if (r == Board.length-1) {
         return true;
       }
       return checkBoard(r+1,0);
     }
-    if (c == Board.length - 1) {
-      if (r == Board.length - 1) {
-        return false;
-      }
-      for (int i = 0; i < Board.length; i++) {
-        if (Board[r][i] == -1) {
-          removeQueen(r,i);
+    else {
+      if (c == Board.length-1) {
+        if (r == 0 || r == Board.length-1) {
+          return false;
+        }
+        else {
+          for (int i == 0; i < Board.length; i++) {
+            if (Board[r][i] == -1) {
+              removeQueen(r,i);
+              return checkBoard(r,i+1);
+            }
+          }
         }
       }
-      return checkBoard(r-1,0);
     }
-    return checkBoard(r,c+1);
   }
   /**
   *@return the number of solutions found, and leaves the board filled with only 0's
