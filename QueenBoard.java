@@ -179,7 +179,7 @@ public class QueenBoard{
         if (solveR(col+1)) {
           return true;
         }
-        removeQueen(col,i);
+        removeQueen(i,col);
       }
     }
     return false;
