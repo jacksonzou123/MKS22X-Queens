@@ -185,6 +185,31 @@ public class QueenBoard{
     return false;
   }
 
+  public int countSolutions() {
+    for (int i = 0 ; i < Board.length; i++) {
+      for (int j = 0; j < Board.length; j++) {
+        if (Board[i][j] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return countR(0);
+  }
+
+  public int countR(int col) {
+    int f = 0;
+    if (col == Board.length) {
+      f++;
+    }
+    for (int i = 0; i < Board.length; i++) {
+      if (addQueen(i,col)) {
+        f += countR(col+1);
+        }
+        removeQueen(i,col);
+      }
+    return f;
+  }
+
   private boolean addQueen(int row, int col) {
     if (Board[row][col] == 0) {
       Board[row][col] = -1;
