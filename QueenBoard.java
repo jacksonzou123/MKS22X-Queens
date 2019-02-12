@@ -5,7 +5,7 @@ public class QueenBoard{
     Board = new int[size][size];
   }
 
-  public boolean addQueen(int r, int c) {
+  /*public boolean addQueen(int r, int c) {
     Board[r][c] = -1;
     for (int i = 1; r+i < Board.length; i++) {
       Board[r+i][c] += 1;
@@ -31,20 +31,8 @@ public class QueenBoard{
       Board[r+i][c-i] -= 1;
     }
     return true;
-  }
+  }*/
 
-  /**
-  *@return The output string formatted as follows:
-  *All numbers that represent queens are replaced with 'Q'
-  *all others are displayed as underscores '_'
-  *There are spaces between each symbol:
-  *"""_ _ Q _
-  *Q _ _ _
-  *_ _ _ Q
-  *_ Q _ _"""
-  *(pythonic string notation for clarity,
-  *excludes the character up to the *)
-  */
   public String toString(){
     String f = "";
     for (int i = 0; i < Board.length; i++) {
@@ -62,11 +50,7 @@ public class QueenBoard{
     return f;
   }
 
-  /**
-  *@return false when the board is not solveable and leaves the board filled with zeros;
-  *        true when the board is solveable, and leaves the board in a solved state
-  *@throws IllegalStateException when the board starts with any non-zero value
-  */
+/*
   public boolean solve(){
     if (Board.length <= 3) {
       return false;
@@ -119,10 +103,7 @@ public class QueenBoard{
       return checkBoard(r,c+1);
     }
   }
-  /**
-  *@return the number of solutions found, and leaves the board filled with only 0's
-  *@throws IllegalStateException when the board starts with any non-zero value
-  */
+
   public int countSolutions(){
     if (Board.length <= 3) {
       return 0;
@@ -175,5 +156,66 @@ public class QueenBoard{
       }
       return checkBoardH(r,c+1,sol);
     }
+  }
+  */
+
+  public boolean solve() {
+    for (int i = 0 ; i < Board.length; i++) {
+      for (int j = 0; j < Board.length; j++) {
+        if (Board[i][j] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return solveR(0);
+  }
+
+  public boolean solveR(int col) {
+    if (col == Board.length) {
+      return true;
+    }
+    for (int i = 0; i < Board.length; i++) {
+      if (addQueen(i,col)) {
+        if (solveR(col+1)) {
+          return true;
+        }
+        removeQueen(col,i);
+      }
+    }
+    return false;
+  }
+
+  public boolean addQueen(int row, int col) {
+    if (Board[row][col] == 0) {
+      Board[row][col] == -1;
+      for (int i = 1; col+i < Board.length; i++) {
+        Board[row][col+i] += 1;
+      }
+      for (int i = 1; col+i < Board.length && row+i < Board.length; i++) {
+        Board[row+i][col+i] += 1;
+      }
+      for (int i = 1; col+i < Board.length && row-i > -1; i++) {
+        Board[row-i][col+i] += 1;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  public boolean removeQueen(int row, int col) {
+    if (Board[row][col] == -1) {
+      Board[row][col] == 0;
+      for (int i = 1; col+i < Board.length; i++) {
+        Board[row][col+i] -= 1;
+      }
+      for (int i = 1; col+i < Board.length && row+i < Board.length; i++) {
+        Board[row+i][col+i] -= 1;
+      }
+      for (int i = 1; col+i < Board.length && row-i > -1; i++) {
+        Board[row-i][col+i] -= 1;
+      }
+      return true;
+    }
+    return false;
   }
 }
