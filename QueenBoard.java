@@ -185,9 +185,9 @@ public class QueenBoard{
     return false;
   }
 
-  public boolean addQueen(int row, int col) {
+  private boolean addQueen(int row, int col) {
     if (Board[row][col] == 0) {
-      Board[row][col] == -1;
+      Board[row][col] = -1;
       for (int i = 1; col+i < Board.length; i++) {
         Board[row][col+i] += 1;
       }
@@ -202,9 +202,9 @@ public class QueenBoard{
     return false;
   }
 
-  public boolean removeQueen(int row, int col) {
+  private boolean removeQueen(int row, int col) {
     if (Board[row][col] == -1) {
-      Board[row][col] == 0;
+      Board[row][col] = 0;
       for (int i = 1; col+i < Board.length; i++) {
         Board[row][col+i] -= 1;
       }
