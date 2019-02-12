@@ -199,7 +199,7 @@ public class QueenBoard{
   public int countR(int col) {
     int f = 0;
     if (col == Board.length) {
-      f++;
+      return 1;
     }
     for (int i = 0; i < Board.length; i++) {
       if (addQueen(i,col)) {
